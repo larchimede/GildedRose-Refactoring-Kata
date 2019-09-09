@@ -31,6 +31,13 @@ class LivingItem {
             if (item.sellIn < 0) {
                 item.quality = 0;
             }
+        } else if (item.name.equals("Conjured Banana Cake")) {
+            decreaseQuality();
+            decreaseQuality();
+            if (item.sellIn < 0) {
+                decreaseQuality();
+                decreaseQuality();
+            }
         } else {
             decreaseQuality();
             if (item.sellIn < 0) {

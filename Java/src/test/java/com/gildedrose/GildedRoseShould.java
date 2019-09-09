@@ -16,6 +16,14 @@ public class GildedRoseShould {
         CombinationApprovals.verifyAllCombinations(this::updateItemQuality, names, qualities, sellins);
     }
 
+    @Test
+    public void decrease_quality_twice_as_fast_than_normal_for_conjured_items() {
+        String[] names = {"Conjured Banana Cake"};
+        Integer[] qualities = {6};
+        Integer[] sellins = {-1, 0, 1};
+        CombinationApprovals.verifyAllCombinations(this::updateItemQuality, names, qualities, sellins);
+    }
+
     private String updateItemQuality(String name, int quality, int sellIns) {
         Item[] items = new Item[]{new Item(name, sellIns, quality)};
         GildedRose app = new GildedRose(items);
