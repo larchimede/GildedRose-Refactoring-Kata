@@ -9,7 +9,7 @@ class GildedRose {
 
     void updateQuality() {
         for (Item item : items) {
-            new ItemWrapper(item).updateQuality();
+            new LivingItem(item).update();
         }
     }
 
