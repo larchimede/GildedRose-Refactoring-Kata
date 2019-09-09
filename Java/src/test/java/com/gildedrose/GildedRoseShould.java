@@ -6,17 +6,17 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class GildedRoseTest {
+public class GildedRoseShould {
 
     @Test
-    public void foo() {
+    public void not_break_unless_there_is_a_regression_on_Aged_or_Backstage_or_Sulfuras_or_Normal_items() {
         String[] names = {"foo", "Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"};
         Integer[] qualities = {0, 1, -1, 49, 50, 51};
         Integer[] sellins = Range.get(-1, 15);
-        CombinationApprovals.verifyAllCombinations(this::doStuff, names, qualities, sellins);
+        CombinationApprovals.verifyAllCombinations(this::updateItemQuality, names, qualities, sellins);
     }
 
-    private String doStuff(String name, int quality, int sellIns) {
+    private String updateItemQuality(String name, int quality, int sellIns) {
         Item[] items = new Item[]{new Item(name, sellIns, quality)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
