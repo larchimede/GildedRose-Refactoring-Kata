@@ -1,48 +1,42 @@
 package com.gildedrose;
 
 class LivingItem {
-    private final Item item;
+    protected final Item item;
 
     LivingItem(Item item) {
         this.item = item;
     }
 
-    void update() {
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            decreaseSellIn();
-            updateQuality();
+    static LivingItem createLivingItem(Item item) {
+        LivingItem livingItem;
+        switch (item.name) {
+            case "Aged Brie":
+                livingItem = new AgedBrieLivingItem(item);
+                break;
+            case "Backstage passes to a TAFKAL80ETC concert":
+                livingItem = new BackstageLivingItem(item);
+                break;
+            case "Conjured Banana Cake":
+                livingItem = new ConjuredLivingItem(item);
+                break;
+            case "Sulfuras, Hand of Ragnaros":
+                livingItem = new SulfurasLivingItem(item);
+                break;
+            default:
+                livingItem = new LivingItem(item);
         }
+        return livingItem;
     }
 
-    private void updateQuality() {
-        if (item.name.equals("Aged Brie")) {
-            increaseQuality();
-            if (item.sellIn < 0) {
-                increaseQuality();
-            }
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            increaseQuality();
-            if (item.sellIn < 10) {
-                increaseQuality();
-            }
-            if (item.sellIn < 5) {
-                increaseQuality();
-            }
-            if (item.sellIn < 0) {
-                item.quality = 0;
-            }
-        } else if (item.name.equals("Conjured Banana Cake")) {
+    void update() {
+        decreaseSellIn();
+        updateQuality();
+    }
+
+    protected void updateQuality() {
+        decreaseQuality();
+        if (item.sellIn < 0) {
             decreaseQuality();
-            decreaseQuality();
-            if (item.sellIn < 0) {
-                decreaseQuality();
-                decreaseQuality();
-            }
-        } else {
-            decreaseQuality();
-            if (item.sellIn < 0) {
-                decreaseQuality();
-            }
         }
     }
 
@@ -50,13 +44,13 @@ class LivingItem {
         item.sellIn -= 1;
     }
 
-    private void decreaseQuality() {
+    void decreaseQuality() {
         if (item.quality > 0) {
             item.quality -= 1;
         }
     }
 
-    private void increaseQuality() {
+    void increaseQuality() {
         if (item.quality < 50) {
             item.quality += 1;
         }

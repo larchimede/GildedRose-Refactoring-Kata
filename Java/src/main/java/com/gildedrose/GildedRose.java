@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import static com.gildedrose.LivingItem.*;
+
 class GildedRose {
     private Item[] items;
 
@@ -9,7 +11,7 @@ class GildedRose {
 
     void updateQuality() {
         for (Item item : items) {
-            new LivingItem(item).update();
+            createLivingItem(item).update();
         }
     }
 
