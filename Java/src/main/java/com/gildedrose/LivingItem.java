@@ -2,9 +2,11 @@ package com.gildedrose;
 
 class LivingItem {
     protected final Item item;
+    int quality_adjustement;
 
     LivingItem(Item item) {
         this.item = item;
+        quality_adjustement = 1;
     }
 
     static LivingItem createLivingItem(Item item) {
@@ -34,9 +36,10 @@ class LivingItem {
     }
 
     protected void updateQuality() {
-        decreaseQuality();
-        if (item.sellIn < 0) {
-            decreaseQuality();
+        if (item.sellIn >= 0) {
+            setQuality(item.quality - quality_adjustement);
+        } else {
+            setQuality(item.quality - 2 * quality_adjustement);
         }
     }
 
@@ -44,15 +47,14 @@ class LivingItem {
         item.sellIn -= 1;
     }
 
-    void decreaseQuality() {
-        if (item.quality > 0) {
-            item.quality -= 1;
+    void setQuality(int quality) {
+        if (quality < 0) {
+            item.quality = 0;
+        } else if (quality > 50) {
+            item.quality = 50;
+        } else {
+            item.quality = quality;
         }
     }
 
-    void increaseQuality() {
-        if (item.quality < 50) {
-            item.quality += 1;
-        }
-    }
 }

@@ -7,15 +7,14 @@ public class BackstageLivingItem extends LivingItem {
 
     @Override
     protected void updateQuality() {
-        increaseQuality();
-        if (item.sellIn < 10) {
-            increaseQuality();
-        }
-        if (item.sellIn < 5) {
-            increaseQuality();
-        }
         if (item.sellIn < 0) {
-            item.quality = 0;
+            setQuality(0);
+        } else if (item.sellIn < 5) {
+            setQuality(item.quality + 3);
+        } else if (item.sellIn < 10) {
+            setQuality(item.quality + 2);
+        } else {
+            setQuality(item.quality + 1);
         }
     }
 
