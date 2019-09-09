@@ -1,13 +1,13 @@
 package com.gildedrose;
 
-public class ItemWrapper {
+class ItemWrapper {
     private final Item item;
 
-    public ItemWrapper(Item item) {
+    ItemWrapper(Item item) {
         this.item = item;
     }
 
-    public void updateQuality() {
+    void updateQuality() {
         if (!item.name.equals("Aged Brie")
                 && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             if (item.quality > 0) {
