@@ -8,8 +8,10 @@ class LivingItem {
     }
 
     void update() {
-        decreaseSellIn();
-        updateQuality();
+        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            decreaseSellIn();
+            updateQuality();
+        }
     }
 
     private void updateQuality() {
@@ -29,8 +31,6 @@ class LivingItem {
             if (item.sellIn < 0) {
                 item.quality = 0;
             }
-        } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            // Nothing to do
         } else {
             decreaseQuality();
             if (item.sellIn < 0) {
@@ -40,9 +40,7 @@ class LivingItem {
     }
 
     private void decreaseSellIn() {
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            item.sellIn -= 1;
-        }
+        item.sellIn -= 1;
     }
 
     private void decreaseQuality() {
